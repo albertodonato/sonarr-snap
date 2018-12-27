@@ -31,11 +31,13 @@ apps:
 parts:
   nzbdrone:
     plugin: nil
+    build-packages:
+      - curl
     override-pull: |
       set -e
 
       URL="http://download.sonarr.tv/v2/master/mono/NzbDrone.master.${SNAPCRAFT_PROJECT_VERSION}.mono.tar.gz"
-      wget "$URL"  -O - | tar xz
+      curl "$URL" | tar xz
     override-build: |
       cp -a NzbDrone "$SNAPCRAFT_PART_INSTALL"
     prime:
