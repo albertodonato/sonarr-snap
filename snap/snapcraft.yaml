@@ -10,7 +10,7 @@ description: |
   The web interface is accessible by default at http://localhost:8989
 
   See https://sonarr.tv for more details.
-icon: icon.png
+icon: icon.svg
 grade: stable
 confinement: strict
 
