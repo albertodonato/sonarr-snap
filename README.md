@@ -4,11 +4,17 @@
 
 This snap contains the [Sonarr](https://sonarr.tv) smart PVR.
 
+It can be installed from the store via:
+
+```bash
+    sudo snap install sonarr
+```
+
 After installing the snap the service web interface will be accessible at
 <http:/localhost:8989> by default.
 
 
-## Build the snap
+## Building the snap
 
 The snap can be built by simply running:
 
