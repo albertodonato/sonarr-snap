@@ -13,6 +13,8 @@ It can be installed from the store via:
 After installing the snap the service web interface will be accessible at
 <http:/localhost:8989> by default.
 
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/sonarr)
+
 
 ## Building the snap
 
