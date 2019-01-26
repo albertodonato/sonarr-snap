@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+#
+# Check if a newer version is available
+#
+
+import re
+import sys
+
+import requests
+import yaml
+
+
+SNAPCRAFT_YAML = 'snap/snapcraft.yaml'
+
+RELEASE_RE = re.compile(
+    r'href="NzbDrone\.master\.([0-9.]+)\.mono\.tar\.gz"', re.M)
+
+
+with open(SNAPCRAFT_YAML) as fd:
+    data = yaml.load(fd)
+
+# the current version in the snap
+snap_version = data['version']
+
+source_url = data['parts']['nzbdrone']['source']
+# the URL to get the latest version from.
+url, _ = source_url.rsplit('/', 1)
+
+response = requests.get(url)
+if response.status_code != 200:
+    print(f'Request failed with code {response.status_code}')
+    sys.exit(1)
+
+versions = RELEASE_RE.findall(response.content.decode('utf-8'))
+latest_version = versions[-1]
+if snap_version != latest_version:
+    print(f'Newer version available: {latest_version}')

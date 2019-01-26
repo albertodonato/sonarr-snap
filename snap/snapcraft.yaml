@@ -31,7 +31,7 @@ apps:
 parts:
   nzbdrone:
     plugin: nil
-    source: http://download.sonarr.tv/v2/master/mono/NzbDrone.master.$SNAPCRAFT_PROJECT_VERSION.mono.tar.gz
+    source: https://download.sonarr.tv/v2/master/mono/NzbDrone.master.$SNAPCRAFT_PROJECT_VERSION.mono.tar.gz
     override-build: |
       set -e
 
