@@ -10,9 +10,11 @@ description: |
   The web interface is accessible by default at http://localhost:8989
 
   See https://sonarr.tv for more details.
+license: GPL-3.0+
 icon: icon.svg
 grade: stable
 confinement: strict
+base: core18
 
 apps:
   nzbdrone:
