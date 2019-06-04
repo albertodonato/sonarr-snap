@@ -26,6 +26,7 @@ apps:
       MONO_PATH: $SNAP/usr/lib/mono/4.5
     daemon: simple
     plugs:
+      - mount-observe
       - network
       - network-bind
       - removable-media
