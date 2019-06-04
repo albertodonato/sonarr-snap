@@ -18,8 +18,10 @@ After installing the snap the service web interface will be accessible at
 
 ## Setting storage path for downloads
 
-Since the application runs as a confined stap, by default the applicaion will only be able to access files under `/var/snap/sonarr`.
-It is also possible to access storage under `/media` by manually connecting the `removable-media` interface with
+Since the application runs as a confined stap, by default the applicaion will
+only be able to access files under `/var/snap/sonarr`.  It is also possible to
+access storage under `/media` by manually connecting the `removable-media`
+interface with
 
 ```bash
     sudo snap connect sonarr:removable-media
@@ -27,6 +29,13 @@ It is also possible to access storage under `/media` by manually connecting the 
 
 It's suggested to create a directory owned by `root` either under
 `/var/snap/sonarr/common` or under `/media`, after connecting the interface.
+
+*Note*: mount points information won't be displayed by default, as it requires
+manually connecting the `mount-observe` interface:
+
+```bash
+    sudo snap connect sonarr:mount-observe
+```
 
 
 ## Building the snap
