@@ -18,7 +18,7 @@ base: core18
 
 apps:
   nzbdrone:
-    command: usr/bin/mono --debug $SNAP/NzbDrone/NzbDrone.exe -data=$SNAP_COMMON
+    command: bin/snapcraft-preload $SNAP/usr/bin/mono --debug $SNAP/NzbDrone/NzbDrone.exe -data=$SNAP_COMMON
     environment:
       MONO_CFG_DIR: $SNAP/etc
       MONO_CONFIG: $SNAP/etc/mono/config
@@ -43,6 +43,14 @@ parts:
       cp -a * "$INST_DIR"
     prime:
       - NzbDrone
+
+  snapcraft-preload:
+    plugin: cmake
+    source: https://github.com/sergiusens/snapcraft-preload.git
+    build-packages:
+      - on amd64:
+          - gcc-multilib
+          - g++-multilib
 
   deps:
     plugin: dump
