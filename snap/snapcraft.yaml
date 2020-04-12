@@ -1,0 +1,86 @@
+name: sonarr
+summary: Smart PVR for newsgroup and bittorrent users
+description: |
+  Sonarr is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS
+  feeds for new episodes of your favorite shows and will grab, sort and rename
+  them. It can also be configured to automatically upgrade the quality of files
+  already downloaded when a better quality format becomes available.
+
+  The web interface is accessible by default at http://localhost:8989
+
+  See https://sonarr.tv for more details.
+license: GPL-3.0+
+icon: icon.svg
+grade: stable
+confinement: strict
+base: core20
+adopt-info: sonarr
+
+layout:
+  /usr/share/.mono:
+    bind: $SNAP_COMMON/mono
+
+apps:
+  sonarr:
+    command: bin/run-sonarr
+    daemon: simple
+    plugs:
+      - mount-observe
+      - network
+      - network-bind
+      - removable-media
+
+parts:
+  sonarr:
+    plugin: nil
+    source: 'https://services.sonarr.tv/v1/download/main/latest?version=3&os=linux'
+    source-type: tar
+    override-build: |
+      INST_DIR="$SNAPCRAFT_PART_INSTALL/Sonarr"
+      mkdir -p "$INST_DIR"
+      cp -a * "$INST_DIR"
+
+      snapcraftctl set-version "$(sed -n 's/^ReleaseVersion=//p' release_info)"
+    prime:
+      - Sonarr
+
+  local:
+    plugin: dump
+    source: snap/local
+
+  snapcraft-preload:
+    plugin: cmake
+    source: https://github.com/sergiusens/snapcraft-preload.git
+    build-packages:
+      - on amd64:
+          - gcc-multilib
+          - g++-multilib
+    organize:
+      usr/local/*: /
+    prime:
+      - -usr
+
+  deps:
+    plugin: dump
+    source: .
+    stage-packages:
+      - ca-certificates-mono
+      - libcurl4
+      - mono-complete
+      - mediainfo
+      - sqlite3
+    filesets:
+      bins:
+        - usr/bin/mcs
+        - usr/bin/mono*
+        - usr/bin/sqlite*
+      libs:
+        - usr/lib
+      etc:
+        - etc/mono
+        - -etc/mono/2.0
+        - -etc/mono/4.0
+    stage:
+      - $bins
+      - $libs
+      - $etc

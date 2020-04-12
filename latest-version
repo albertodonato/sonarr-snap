@@ -1,0 +1,5 @@
+#!/bin/bash -e
+
+CHECK_URL="https://services.sonarr.tv/v1/update/main/changes"
+
+curl -s "$CHECK_URL?os=linux" | jq -r .[0].version

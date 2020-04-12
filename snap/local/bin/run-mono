@@ -1,0 +1,8 @@
+#!/bin/bash -e
+
+export MONO_CFG_DIR="$SNAP/etc"
+export MONO_CONFIG="$SNAP/etc/mono/config"
+export MONO_GAC_PREFIX="$SNAP/usr/lib/mono/gac"
+export MONO_PATH="$SNAP/usr/lib/mono/4.5"
+
+exec "$SNAP/bin/snapcraft-preload" "$SNAP/usr/bin/mono" "$@"
