@@ -9,22 +9,24 @@ import requests
 import yaml
 
 
-SNAPCRAFT_YAML = 'snapcraft.yaml'
+UPDATES_URL = "https://services.sonarr.tv/v1/update/master"
+
+SNAPCRAFT_YAML = "snapcraft.yaml"
 
 with open(SNAPCRAFT_YAML) as fd:
     data = yaml.safe_load(fd)
 
 # the current version in the snap
-snap_version = data['version']
+snap_version = data["version"]
 
 response = requests.get(
-    'https://services.sonarr.tv/v1/update/master',
-    params={'os': 'linux', 'version': snap_version})
+    UPDATES_URL,
+    params={"os": "linux", "version": snap_version})
 if response.status_code != 200:
-    print(f'Request failed with code {response.status_code}')
+    print(f"Request failed with code {response.status_code}")
     sys.exit(1)
 
 data = response.json()
-if data['available']:
-    latest_version = data['updatePackage']['version']
-    print(f'Newer version available: {latest_version}')
+if data["available"]:
+    latest_version = data["updatePackage"]["version"]
+    print(f"Newer version available: {latest_version}")

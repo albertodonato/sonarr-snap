@@ -192,7 +192,7 @@ parts:
       set -e
 
       snapcraftctl build
-      sed -i "s,/usr/lib/,/snap/sonarr/current/usr/lib/,g" $SNAPCRAFT_PART_INSTALL/etc/mono/config
+      sed -i "s,/usr/lib/,/snap/sonarr/current/usr/lib/,g" "$SNAPCRAFT_PART_INSTALL/etc/mono/config"
     filesets:
       bins:
         - usr/bin/mono*
