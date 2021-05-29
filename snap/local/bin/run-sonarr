@@ -1,4 +1,4 @@
 #!/bin/bash -e
 
 run-mono -- "$SNAP/usr/lib/mono/4.5/cert-sync.exe" /etc/ssl/certs/ca-certificates.crt
-exec run-mono -- "$SNAP/Sonarr/Sonarr.exe" -data="$SNAP_COMMON"
+exec run-mono --debug -- "$SNAP/Sonarr/Sonarr.exe" -data="$SNAP_COMMON"
