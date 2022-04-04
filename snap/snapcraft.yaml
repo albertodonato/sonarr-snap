@@ -1,28 +1,29 @@
-name: sonarr
-summary: Smart PVR for newsgroup and bittorrent users
+name: radarr
+summary: Smart Movies PVR for Usenet and BitTorrent users
 description: |
-  Sonarr is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS
-  feeds for new episodes of your favorite shows and will grab, sort and rename
-  them. It can also be configured to automatically upgrade the quality of files
-  already downloaded when a better quality format becomes available.
+  Radarr is a movie collection manager for Usenet and BitTorrent users. 
+  It can monitor multiple RSS feeds for new movies and will interface with 
+  clients and indexers to grab, sort, and rename them. It can also be configured 
+  to automatically upgrade the quality of existing files in the library when a 
+  better quality format becomes available.
 
-  The web interface is accessible by default at http://localhost:8989
+  The web interface is accessible by default at http://localhost:7878
 
-  See https://sonarr.tv for more details.
+  See https://radarr.video for more details.
 license: GPL-3.0+
 icon: icon.svg
 grade: stable
 confinement: strict
 base: core20
-adopt-info: sonarr
+adopt-info: radarr
 
 layout:
   /usr/share/.mono:
     bind: $SNAP_COMMON/mono
 
 apps:
-  sonarr:
-    command: bin/run-sonarr
+  radarr:
+    command: bin/run-radarr
     daemon: simple
     plugs:
       - mount-observe
@@ -31,18 +32,22 @@ apps:
       - removable-media
 
 parts:
-  sonarr:
+  radarr:
     plugin: nil
-    source: 'https://services.sonarr.tv/v1/download/main/latest?version=3&os=linux'
+    source: 'https://radarr.servarr.com/v1/update/master/updatefile?os=linux'
     source-type: tar
     override-build: |
-      INST_DIR="$SNAPCRAFT_PART_INSTALL/Sonarr"
+      INST_DIR="$SNAPCRAFT_PART_INSTALL/Radarr"
       mkdir -p "$INST_DIR"
       cp -a * "$INST_DIR"
 
-      snapcraftctl set-version "$(sed -n 's/^ReleaseVersion=//p' release_info)"
+      apt install curl jq
+
+      CHECK_URL="https://radarr.servarr.com/v1/update/master/changes?os=linux"
+
+      snapcraftctl set-version "$(curl -s ${CHECK_URL} | jq -r .[0].version)"
     prime:
-      - Sonarr
+      - Radarr
 
   local:
     plugin: dump
