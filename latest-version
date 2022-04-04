@@ -1,5 +1,5 @@
 #!/bin/bash -e
 
-CHECK_URL="https://services.sonarr.tv/v1/update/main/changes"
+CHECK_URL="https://radarr.servarr.com/v1/update/master/changes"
 
 curl -s "$CHECK_URL?os=linux" | jq -r .[0].version
