@@ -7,7 +7,7 @@ This snap contains the [Sonarr](https://sonarr.tv) smart PVR.
 It can be installed from the store via:
 
 ```bash
-    sudo snap install sonarr
+sudo snap install sonarr
 ```
 
 After installing the snap the service web interface will be accessible at
@@ -24,7 +24,7 @@ access storage under `/media` by manually connecting the `removable-media`
 interface with
 
 ```bash
-    sudo snap connect sonarr:removable-media
+sudo snap connect sonarr:removable-media
 ```
 
 It's suggested to create a directory owned by `root` either under
@@ -34,7 +34,7 @@ It's suggested to create a directory owned by `root` either under
 manually connecting the `mount-observe` interface:
 
 ```bash
-    sudo snap connect sonarr:mount-observe
+sudo snap connect sonarr:mount-observe
 ```
 
 
@@ -43,11 +43,11 @@ manually connecting the `mount-observe` interface:
 The snap can be built by simply running:
 
 ```bash
-    snapcraft
+snapcraft
 ```
 
 Once, built, install the snap with:
 
 ```bash
-    sudo snap install --dangerous sonarr_*.snap
+sudo snap install --dangerous sonarr_*.snap
 ```
