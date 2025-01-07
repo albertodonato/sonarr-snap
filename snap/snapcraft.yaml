@@ -13,7 +13,11 @@ license: GPL-3.0+
 icon: icon.svg
 grade: stable
 confinement: strict
-base: core20
+base: core24
+platforms:
+  amd64:
+  arm64:
+  armhf:
 adopt-info: sonarr
 
 layout:
@@ -69,18 +73,11 @@ parts:
       - mono-complete
       - mediainfo
       - sqlite3
-    filesets:
-      bins:
-        - usr/bin/mcs
-        - usr/bin/mono*
-        - usr/bin/sqlite*
-      libs:
-        - usr/lib
-      etc:
-        - etc/mono
-        - -etc/mono/2.0
-        - -etc/mono/4.0
     stage:
-      - $bins
-      - $libs
-      - $etc
+      - etc/mono
+      - -etc/mono/2.0
+      - -etc/mono/4.0
+      - usr/bin/mcs
+      - usr/bin/mono*
+      - usr/bin/sqlite*
+      - usr/lib
