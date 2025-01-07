@@ -37,14 +37,15 @@ apps:
 parts:
   sonarr:
     plugin: nil
-    source: 'https://services.sonarr.tv/v1/download/main/latest?version=3&os=linux'
+    source: 'https://services.sonarr.tv/v1/download/main/latest?version=4&os=linux'
     source-type: tar
     override-build: |
-      INST_DIR="$SNAPCRAFT_PART_INSTALL/Sonarr"
+      INST_DIR="$CRAFT_PART_INSTALL/Sonarr"
       mkdir -p "$INST_DIR"
       cp -a * "$INST_DIR"
 
-      snapcraftctl set-version "$(sed -n 's/^ReleaseVersion=//p' release_info)"
+      VERSION="$($INST_DIR/Sonarr /? | sed 's/.*Version \([^ ]\+\).*$/\1/g; q')"
+      craftctl set version="$VERSION"
     prime:
       - Sonarr
 
