@@ -70,7 +70,7 @@ parts:
     source: .
     stage-packages:
       - ca-certificates-mono
-      - libcurl4
+      - libcurl4t64
       - mono-complete
       - mediainfo
       - sqlite3
