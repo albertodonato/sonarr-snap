@@ -37,8 +37,6 @@ apps:
 parts:
   sonarr:
     plugin: nil
-    source: 'https://services.sonarr.tv/v1/download/main/latest?version=4&os=linux'
-    source-type: tar
     override-pull: |
       case $CRAFT_ARCH_BUILD_FOR in
         amd64) arch=x64 ;;
@@ -52,6 +50,8 @@ parts:
 
       VERSION="$($CRAFT_PART_INSTALL/Sonarr/Sonarr /? | sed 's/.*Version \([^ ]\+\).*$/\1/g; q')"
       craftctl set version="$VERSION"
+    build-packages:
+      - curl
     prime:
       - Sonarr
 
