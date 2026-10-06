@@ -1,5 +1,8 @@
 # Snap for the Sonarr smart PVR
 
+> [!WARNING]
+> **This snap is no longer updated or maintained.**
+
 [![Snap Package](https://snapcraft.io/sonarr/badge.svg)](https://snapcraft.io/sonarr)
 
 This snap contains the [Sonarr](https://sonarr.tv) smart PVR.
